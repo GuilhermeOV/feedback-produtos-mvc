@@ -1,0 +1,16 @@
+# Arquivos gerados pelo Maven ao compilar
+target/
+deploy/
+*.war
+
+# Arquivos de IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
