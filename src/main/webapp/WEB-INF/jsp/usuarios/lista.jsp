@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Produtos - Feedback</title>
+    <title>Usuarios - Feedback</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilo.css">
 </head>
 <body>
@@ -21,8 +21,8 @@
 
 <main class="container">
     <div class="page-header">
-        <h1>Produtos</h1>
-        <a class="btn" href="${pageContext.request.contextPath}/produtos?acao=novo">Novo produto</a>
+        <h1>Usuarios</h1>
+        <a class="btn" href="${pageContext.request.contextPath}/usuarios?acao=novo">Novo usuario</a>
     </div>
 
     <c:if test="${not empty erro}">
@@ -31,8 +31,8 @@
 
     <div class="table-wrap">
         <c:choose>
-            <c:when test="${empty produtos}">
-                <p class="empty">Nenhum produto cadastrado.</p>
+            <c:when test="${empty usuarios}">
+                <p class="empty">Nenhum usuario cadastrado.</p>
             </c:when>
             <c:otherwise>
                 <table>
@@ -40,22 +40,20 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Descricao</th>
-                        <th>Preco (R$)</th>
+                        <th>Email</th>
                         <th>Acoes</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="produto" items="${produtos}">
+                    <c:forEach var="usuario" items="${usuarios}">
                         <tr>
-                            <td>${produto.id}</td>
-                            <td>${produto.nome}</td>
-                            <td>${produto.descricao}</td>
-                            <td>${produto.preco}</td>
+                            <td>${usuario.id}</td>
+                            <td>${usuario.nome}</td>
+                            <td>${usuario.email}</td>
                             <td class="links">
-                                <a href="${pageContext.request.contextPath}/produtos?acao=editar&id=${produto.id}">Editar</a>
-                                <a href="${pageContext.request.contextPath}/produtos?acao=excluir&id=${produto.id}"
-                                   onclick="return confirm('Excluir este produto?');">Excluir</a>
+                                <a href="${pageContext.request.contextPath}/usuarios?acao=editar&id=${usuario.id}">Editar</a>
+                                <a href="${pageContext.request.contextPath}/usuarios?acao=excluir&id=${usuario.id}"
+                                   onclick="return confirm('Excluir este usuario?');">Excluir</a>
                             </td>
                         </tr>
                     </c:forEach>

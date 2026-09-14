@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         <c:choose>
-            <c:when test="${empty produto.id}">Novo produto</c:when>
-            <c:otherwise>Editar produto</c:otherwise>
+            <c:when test="${empty usuario.id}">Novo usuario</c:when>
+            <c:otherwise>Editar usuario</c:otherwise>
         </c:choose>
         - Feedback
     </title>
@@ -29,8 +29,8 @@
     <div class="page-header">
         <h1>
             <c:choose>
-                <c:when test="${empty produto.id}">Novo produto</c:when>
-                <c:otherwise>Editar produto</c:otherwise>
+                <c:when test="${empty usuario.id}">Novo usuario</c:when>
+                <c:otherwise>Editar usuario</c:otherwise>
             </c:choose>
         </h1>
     </div>
@@ -40,28 +40,23 @@
             <div class="alert alert-erro">${erro}</div>
         </c:if>
 
-        <form method="post" action="${pageContext.request.contextPath}/produtos">
+        <form method="post" action="${pageContext.request.contextPath}/usuarios">
             <input type="hidden" name="acao" value="salvar">
-            <input type="hidden" name="id" value="${produto.id}">
+            <input type="hidden" name="id" value="${usuario.id}">
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value="${produto.nome}" required>
+                <input type="text" id="nome" name="nome" value="${usuario.nome}" required>
             </div>
 
             <div class="form-group">
-                <label for="descricao">Descricao</label>
-                <textarea id="descricao" name="descricao" required>${produto.descricao}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="preco">Preco (R$)</label>
-                <input type="number" step="0.01" min="0" id="preco" name="preco" value="${produto.preco}" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="${usuario.email}" required>
             </div>
 
             <div class="actions">
                 <button type="submit" class="btn">Salvar</button>
-                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/produtos">Cancelar</a>
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/usuarios">Cancelar</a>
             </div>
         </form>
     </div>
