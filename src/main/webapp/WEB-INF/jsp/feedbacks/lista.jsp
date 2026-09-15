@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Produtos - Feedback</title>
+    <title>Feedbacks - Feedback</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilo.css">
 </head>
 <body>
@@ -22,8 +22,8 @@
 
 <main class="container">
     <div class="page-header">
-        <h1>Produtos</h1>
-        <a class="btn" href="${pageContext.request.contextPath}/produtos?acao=novo">Novo produto</a>
+        <h1>Feedbacks</h1>
+        <a class="btn" href="${pageContext.request.contextPath}/feedbacks?acao=novo">Novo feedback</a>
     </div>
 
     <c:if test="${not empty erro}">
@@ -32,31 +32,33 @@
 
     <div class="table-wrap">
         <c:choose>
-            <c:when test="${empty produtos}">
-                <p class="empty">Nenhum produto cadastrado.</p>
+            <c:when test="${empty feedbacks}">
+                <p class="empty">Nenhum feedback cadastrado.</p>
             </c:when>
             <c:otherwise>
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descricao</th>
-                        <th>Preco (R$)</th>
+                        <th>Produto</th>
+                        <th>Usuario</th>
+                        <th>Nota</th>
+                        <th>Comentario</th>
                         <th>Acoes</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="produto" items="${produtos}">
+                    <c:forEach var="feedback" items="${feedbacks}">
                         <tr>
-                            <td>${produto.id}</td>
-                            <td>${produto.nome}</td>
-                            <td>${produto.descricao}</td>
-                            <td>${produto.preco}</td>
+                            <td>${feedback.id}</td>
+                            <td>${feedback.produto.nome}</td>
+                            <td>${feedback.usuario.nome}</td>
+                            <td>${feedback.nota}</td>
+                            <td>${feedback.comentario}</td>
                             <td class="links">
-                                <a href="${pageContext.request.contextPath}/produtos?acao=editar&id=${produto.id}">Editar</a>
-                                <a href="${pageContext.request.contextPath}/produtos?acao=excluir&id=${produto.id}"
-                                   onclick="return confirm('Excluir este produto?');">Excluir</a>
+                                <a href="${pageContext.request.contextPath}/feedbacks?acao=editar&id=${feedback.id}">Editar</a>
+                                <a href="${pageContext.request.contextPath}/feedbacks?acao=excluir&id=${feedback.id}"
+                                   onclick="return confirm('Excluir este feedback?');">Excluir</a>
                             </td>
                         </tr>
                     </c:forEach>
