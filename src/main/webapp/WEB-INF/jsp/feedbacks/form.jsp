@@ -19,6 +19,7 @@
     <div class="container">
         <strong>Feedback de Produtos</strong>
         <nav>
+            <a href="${pageContext.request.contextPath}/home">Inicio</a>
             <a href="${pageContext.request.contextPath}/produtos">Produtos</a>
             <a href="${pageContext.request.contextPath}/usuarios">Usuarios</a>
             <a href="${pageContext.request.contextPath}/feedbacks">Feedbacks</a>
