@@ -1,14 +1,30 @@
+/* =========================================================
+   Aplicativo de Feedback para Produtos
+   Folha de estilo principal
+   ========================================================= */
+
 :root {
-    --bg: #f3f5f8;
+    --bg-1: #eef2f9;
+    --bg-2: #e6ecf8;
     --surface: #ffffff;
     --text: #1f2937;
     --muted: #6b7280;
-    --border: #d7dde5;
-    --primary: #1f4e79;
-    --primary-hover: #163a5a;
-    --danger: #b42318;
-    --danger-bg: #fef3f2;
-    --ok-bg: #ecfdf3;
+    --border: #e2e8f0;
+
+    --primary: #4f46e5;
+    --primary-2: #7c3aed;
+    --primary-hover: #4338ca;
+
+    --danger: #dc2626;
+    --danger-bg: #fef2f2;
+    --danger-border: #fecaca;
+
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow: 0 10px 25px rgba(79, 70, 229, 0.08), 0 4px 10px rgba(16, 24, 40, 0.05);
+    --shadow-lg: 0 20px 40px rgba(79, 70, 229, 0.16);
+    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -17,58 +33,49 @@
 
 body {
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg);
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
     color: var(--text);
+    background:
+        radial-gradient(1200px 600px at 100% -10%, rgba(124, 58, 237, 0.10), transparent 60%),
+        radial-gradient(1000px 500px at -10% 0%, rgba(79, 70, 229, 0.10), transparent 55%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    background-attachment: fixed;
 }
 
 a {
     color: var(--primary);
     text-decoration: none;
+    transition: color var(--transition);
 }
 
 a:hover {
-    text-decoration: underline;
+    color: var(--primary-hover);
 }
 
+/* ---------- Layout base ---------- */
+
 .container {
-    width: min(960px, 92%);
+    width: min(1040px, 92%);
     margin: 0 auto;
 }
 
-.login-page {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
+main.container {
+    padding-bottom: 3rem;
+    animation: fadeInUp 420ms ease both;
 }
 
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-}
-
-.login-card {
-    width: min(420px, 92%);
-}
-
-.login-card h1 {
-    margin: 0 0 0.35rem;
-    font-size: 1.6rem;
-}
-
-.login-card p {
-    margin: 0 0 1.25rem;
-    color: var(--muted);
-}
+/* ---------- Barra superior ---------- */
 
 .topbar {
-    background: var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(120deg, var(--primary), var(--primary-2));
     color: #fff;
-    padding: 0.9rem 0;
-    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
 }
 
 .topbar .container {
@@ -76,54 +83,133 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
-.topbar a {
-    color: #fff;
+.topbar strong {
+    font-size: 1.15rem;
+    letter-spacing: 0.2px;
 }
 
 .topbar nav {
     display: flex;
-    gap: 1rem;
+    gap: 0.35rem;
     flex-wrap: wrap;
 }
+
+.topbar nav a {
+    color: #fff;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.topbar nav a:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+/* ---------- Cabecalho de pagina ---------- */
 
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
 }
 
 .page-header h1 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+/* ---------- Tela de login / boas-vindas ---------- */
+
+.login-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+}
+
+.login-card {
+    width: min(440px, 100%);
+}
+
+.login-card h1 {
+    margin: 0 0 0.35rem;
+    font-size: 1.7rem;
+    background: linear-gradient(120deg, var(--primary), var(--primary-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-card p {
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+}
+
+/* ---------- Cartoes ---------- */
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
 }
 
 .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
 }
 
 .menu-card {
+    position: relative;
     display: block;
-    padding: 1.25rem;
+    padding: 1.5rem;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius);
     color: inherit;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
 }
 
 .menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
     text-decoration: none;
-    border-color: var(--primary);
+}
+
+.menu-card:hover::before {
+    transform: scaleX(1);
 }
 
 .menu-card strong {
     display: block;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
     color: var(--primary);
 }
 
@@ -132,14 +218,17 @@ a:hover {
     font-size: 0.95rem;
 }
 
+/* ---------- Formularios ---------- */
+
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
 }
 
 label {
     display: block;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.4rem;
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 input[type="text"],
@@ -149,75 +238,105 @@ input[type="password"],
 textarea,
 select {
     width: 100%;
-    padding: 0.65rem 0.75rem;
+    padding: 0.7rem 0.85rem;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     font: inherit;
+    color: var(--text);
     background: #fff;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
 }
 
 textarea {
-    min-height: 90px;
+    min-height: 110px;
     resize: vertical;
 }
+
+/* ---------- Botoes ---------- */
 
 .actions {
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
 }
 
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: 0;
-    border-radius: 8px;
-    padding: 0.65rem 1rem;
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 1.25rem;
     font: inherit;
+    font-weight: 600;
     cursor: pointer;
-    background: var(--primary);
     color: #fff;
+    background: linear-gradient(120deg, var(--primary), var(--primary-2));
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.28);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
 }
 
 .btn:hover {
-    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(79, 70, 229, 0.35);
+    filter: brightness(1.05);
     text-decoration: none;
+    color: #fff;
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn-secondary {
-    background: #e5e7eb;
+    background: #eef2f7;
     color: var(--text);
+    box-shadow: none;
+    border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-    background: #d1d5db;
+    background: #e2e8f0;
+    color: var(--text);
 }
 
 .btn-danger {
-    background: var(--danger);
+    background: linear-gradient(120deg, #ef4444, #dc2626);
+    box-shadow: 0 8px 18px rgba(220, 38, 38, 0.28);
 }
 
-.btn-danger:hover {
-    background: #912018;
-}
+/* ---------- Alertas ---------- */
 
 .alert {
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 300ms ease both;
 }
 
 .alert-erro {
     background: var(--danger-bg);
     color: var(--danger);
-    border: 1px solid #fecdca;
+    border: 1px solid var(--danger-border);
 }
+
+/* ---------- Tabelas ---------- */
 
 .table-wrap {
     overflow-x: auto;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
 table {
@@ -227,15 +346,26 @@ table {
 
 th,
 td {
-    padding: 0.8rem 0.9rem;
+    padding: 0.9rem 1rem;
     border-bottom: 1px solid var(--border);
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
-th {
+thead th {
     background: #f8fafc;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+}
+
+tbody tr {
+    transition: background var(--transition);
+}
+
+tbody tr:hover {
+    background: rgba(79, 70, 229, 0.04);
 }
 
 tr:last-child td {
@@ -244,11 +374,42 @@ tr:last-child td {
 
 .links {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.9rem;
     flex-wrap: wrap;
+}
+
+.links a {
+    font-weight: 600;
+    font-size: 0.92rem;
 }
 
 .empty {
     color: var(--muted);
-    padding: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* ---------- Animacoes ---------- */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 600px) {
+    .page-header {
+        align-items: flex-start;
+    }
+    .topbar .container {
+        justify-content: center;
+        text-align: center;
+    }
 }
