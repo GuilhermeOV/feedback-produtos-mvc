@@ -28,6 +28,8 @@ feedback/
 ├── docker-compose.yml          # Sobe o MySQL e o Tomcat juntos
 ├── init.sql                    # Cria o banco e as 3 tabelas + dados de exemplo
 ├── pom.xml                     # Configuracao do Maven (dependencias e build)
+├── docs/
+│   └── roteiro-de-testes.md    # Roteiro de testes manuais do sistema
 └── src/main/
     ├── java/br/com/feedback/
     │   ├── config/
@@ -83,6 +85,33 @@ Navegador  ->  Controller (Servlet)  ->  Service (regras)  ->  DAO (SQL)  ->  Ba
 Exemplo prático (excluir um produto): o `ProdutoServlet` recebe a rota, chama
 `ProdutoService.deletar()`, que valida a regra e chama `ProdutoDAO.deletar()`, que executa o
 `DELETE`. Por fim o Controller redireciona para a lista, e a View exibe o resultado.
+
+## 🧩 Padrões de projeto utilizados
+
+Além do MVC, o projeto aplica outros padrões apresentados em aula:
+
+- **DAO (Data Access Object):** isola todo o acesso ao banco de dados em classes específicas
+  (`ProdutoDAO`, `UsuarioDAO`, `FeedbackDAO`). O restante do sistema não escreve SQL diretamente.
+- **Service:** centraliza as regras de negócio e validações (`ProdutoService`, `UsuarioService`,
+  `FeedbackService`), mantendo os Controllers simples.
+- **Singleton:** a classe `MysqlSingleton` garante uma única instância de conexão com o banco,
+  reaproveitada por toda a aplicação.
+- **Front Controller / Herança:** a classe `BaseServlet` reúne comportamentos comuns (ler
+  parâmetros, encaminhar para JSP, redirecionar) e é herdada por todos os Controllers.
+
+## 🌐 Rotas da aplicação
+
+| Rota | Ação (parâmetro `acao`) | Descrição |
+|------|--------------------------|-----------|
+| `/home` | — | Tela inicial com atalhos |
+| `/produtos` | (vazio) | Lista os produtos |
+| `/produtos?acao=novo` | novo | Formulário de novo produto |
+| `/produtos?acao=editar&id=X` | editar | Formulário de edição |
+| `/produtos?acao=excluir&id=X` | excluir | Exclui o produto |
+| `/usuarios` | (mesmas ações) | CRUD de usuários |
+| `/feedbacks` | (mesmas ações) | CRUD de feedbacks |
+
+> O cadastro e a alteração (Salvar) são enviados via método **POST**; as demais ações usam **GET**.
 
 ## 🗄️ Banco de dados
 
